@@ -135,6 +135,19 @@
       font-weight: bold;
       color: burlywood;
     }
+
+    .detect-button{
+      padding: 7px 20px;
+      background-color: burlywood;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .detect-button:hover {
+      background-color: #a96f11;
+    }
     </style>
   </head>
   <body>
@@ -154,120 +167,133 @@
     <div style="margin-top: 85px; margin-left: 40px;">
         <h1>{{ description }}</h1>
     </div>
+    
+    <div class="img-grid">
+      <div class="card-container">
+        <div class="card">
+          <img src="{% static 'baddha_konasana.jpg' %}" alt="Baddha Konasana Pose" />
+          <h3>Baddha Konasana Pose</h3>
+          <br>
+          <span>Description</span>
+          <p>Begin seated on the floor with your legs extended. Bend your knees and bring the soles of your feet together, allowing your knees to fall outward.
+             Hold onto your feet or ankles with your hands.
+             Sit up tall with your spine straight.
+             Gently press your knees toward the floor while keeping your spine lengthened.
+          </p>
+          <br>
+          <span>Benefits</span>
+          <p>Stretches the inner thighs and groins</p>
+          <p>Opens the hips</p>
+          <p>Relieves mild depression and anxiety</p>
+          <p>Eases menstrual discomfort</p>
+          <br>
+          <a href="{% url 'vedio_capture1' %}" class="detect-button">Try It</a>
+        </div>
+  
+        <div class="card">
+          <img src="{% static 'bitilasana.jpg' %}" alt="Bitilasana Pose" />
+          <h3>Bitilasana Pose</h3>
+          <br>
+          <span>Description</span>
+          <p>
+            Start on your hands and knees in a tabletop position, with your wrists directly under your shoulders and your knees under your hips.
+            Inhale as you arch your back, lifting your chest and tailbone towards the ceiling. Your belly will move towards the floor.
+            Lift your head slightly, gazing forward or slightly upward.
+          </p>
+          <br>
+          <span>Benefits</span>
+          <p>Stretches the Front Body</p>
+          <p>Improves Posture</p>
+          <p>Relieves Stress</p>
+          <br>
+          <a href="{% url 'vedio_capture1' %}" class="detect-button">Try It</a>
+        </div>
+  
+        <div class="card">
+          <img src="{% static 'padmasana.jpg' %}" alt="Padmasana Pose" />
+          <h3>Padmasana Pose</h3>
+          <br>
+          <span>Description</span>
+          <p>
+            Start by sitting on the floor with your legs extended and your spine erect.
+            Bend your right knee and bring your right foot to the top of your left thigh, with the sole of your right foot facing upward and your heel close to your abdomen.
+            Bend your left knee and bring your left foot to the top of your right thigh, with the sole of your left foot facing upward and your heel close to your abdomen.
+            Rest your hands on your knees in a comfortable position, with your palms facing upward and your fingers in a mudra if desired.
+          </p>
+          <br>
+          <span>Benefits</span>
+          <p>Stimulates Digestion</p>
+          <p>Calms the Mind</p>
+          <p>Increases Concentration</p>
+          <br>
+          <a href="{% url 'vedio_capture1' %}" class="detect-button">Try It</a>
+        </div>
 
-    <div class="card-container">
-      <div class="card">
-        <img src="{% static 'baddha_konasana.jpg' %}" alt="Baddha Konasana Pose" />
-        <h3>Baddha Konasana Pose</h3>
-        <br>
-        <span>Description</span>
-        <p>Begin seated on the floor with your legs extended. Bend your knees and bring the soles of your feet together, allowing your knees to fall outward.
-           Hold onto your feet or ankles with your hands.
-           Sit up tall with your spine straight.
-           Gently press your knees toward the floor while keeping your spine lengthened.
-        </p>
-        <br>
-        <span>Benefits</span>
-        <p>Stretches the inner thighs and groins</p>
-        <p>Opens the hips</p>
-        <p>Relieves mild depression and anxiety</p>
-        <p>Eases menstrual discomfort</p>
-      </div>
+        <div class="card">
+          <img src="{% static 'pranam.jpg' %}" alt="Pranam Pose" />
+          <h3>Pranam Pose</h3>
+          <br>
+          <span>Description</span>
+          <p>
+            Begin standing in Tadasana (Mountain Pose) with your feet together or hip-width apart, depending on your comfort.
+            Bring your palms together in front of your chest in a prayer position, with your fingers pointing upward and your thumbs resting lightly against your sternum.
+            Press your palms together firmly, keeping your fingers and thumbs aligned.
+            Relax your shoulders and lengthen your spine, keeping your gaze forward or closing your eyes if you prefer.
+          </p>
+          <br>
+          <span>Benefits</span>
+          <p>Balances the Body</p>
+          <p>Opens the Chest</p>
+          <p>Centering and Grounding</p>
+          <br>
+          <a href="{% url 'vedio_capture1' %}" class="detect-button">Try It</a>
+        </div>
 
-      <div class="card">
-        <img src="{% static 'bitilasana.jpg' %}" alt="Bitilasana Pose" />
-        <h3>Bitilasana Pose</h3>
-        <br>
-        <span>Description</span>
-        <p>
-          Start on your hands and knees in a tabletop position, with your wrists directly under your shoulders and your knees under your hips.
-          Inhale as you arch your back, lifting your chest and tailbone towards the ceiling. Your belly will move towards the floor.
-          Lift your head slightly, gazing forward or slightly upward.
-        </p>
-        <br>
-        <span>Benefits</span>
-        <p>Stretches the Front Body</p>
-        <p>Improves Posture</p>
-        <p>Relieves Stress</p>
-      </div>
+        <div class="card">
+          <img src="{% static 'trikonsana.jpg' %}" alt="Trikonsana Pose" />
+          <h3>Trikonsana Pose</h3>
+          <br>
+          <span>Description</span>
+          <p>
+            Centering involves bringing your awareness to the present moment and focusing on your inner self.
+            It's about finding a sense of balance and calmness within yourself, regardless of external circumstances.
+            Centering practices often include deep breathing, meditation, or visualization techniques that help you feel more centered and balanced.
+            Grounding is about connecting with the earth and creating a sense of stability and rootedness.
+            It's like feeling anchored to the ground, both physically and energetically.
+            Grounding practices often involve physical exercises.
+          </p>
+          <br>
+          <span>Benefits</span>
+          <p>Reduced Stress and Anxiety</p>
+          <p>Improved Focus and Clarity</p>
+          <p>Spiritual Connection</p>
+          <p>Physical Benefits</p>
+          <br>
+          <a href="{% url 'vedio_capture1' %}" class="detect-button">Try It</a>
+        </div>
 
-      <div class="card">
-        <img src="{% static 'padmasana.jpg' %}" alt="Padmasana Pose" />
-        <h3>Padmasana Pose</h3>
-        <br>
-        <span>Description</span>
-        <p>
-          Start by sitting on the floor with your legs extended and your spine erect.
-          Bend your right knee and bring your right foot to the top of your left thigh, with the sole of your right foot facing upward and your heel close to your abdomen.
-          Bend your left knee and bring your left foot to the top of your right thigh, with the sole of your left foot facing upward and your heel close to your abdomen.
-          Rest your hands on your knees in a comfortable position, with your palms facing upward and your fingers in a mudra if desired.
-        </p>
-        <br>
-        <span>Benefits</span>
-        <p>Stimulates Digestion</p>
-        <p>Calms the Mind</p>
-        <p>Increases Concentration</p>
-      </div>
-
-      <div class="card">
-        <img src="{% static 'pranam.jpg' %}" alt="Pranam Pose" />
-        <h3>Pranam Pose</h3>
-        <br>
-        <span>Description</span>
-        <p>
-          Begin standing in Tadasana (Mountain Pose) with your feet together or hip-width apart, depending on your comfort.
-          Bring your palms together in front of your chest in a prayer position, with your fingers pointing upward and your thumbs resting lightly against your sternum.
-          Press your palms together firmly, keeping your fingers and thumbs aligned.
-          Relax your shoulders and lengthen your spine, keeping your gaze forward or closing your eyes if you prefer.
-        </p>
-        <br>
-        <span>Benefits</span>
-        <p>Balances the Body</p>
-        <p>Opens the Chest</p>
-        <p>Centering and Grounding</p>
-      </div>
-
-      <div class="card">
-        <img src="{% static 'trikonsana.jpg' %}" alt="Trikonsana Pose" />
-        <h3>Trikonsana Pose</h3>
-        <br>
-        <span>Description</span>
-        <p>
-          Centering involves bringing your awareness to the present moment and focusing on your inner self.
-          It's about finding a sense of balance and calmness within yourself, regardless of external circumstances.
-          Centering practices often include deep breathing, meditation, or visualization techniques that help you feel more centered and balanced.
-          Grounding is about connecting with the earth and creating a sense of stability and rootedness.
-          It's like feeling anchored to the ground, both physically and energetically.
-          Grounding practices often involve physical exercises.
-        </p>
-        <br>
-        <span>Benefits</span>
-        <p>Reduced Stress and Anxiety</p>
-        <p>Improved Focus and Clarity</p>
-        <p>Spiritual Connection</p>
-        <p>Physical Benefits</p>
-      </div>
-
-      <div class="card">
-        <img src="{% static 'vasisthasana.jpg' %}" alt="Vasisthasana Pose" />
-        <h3>Vasisthasana Pose</h3>
-        <br>
-        <span>Description</span>
-        <p>
-          Start in a plank position, with your hands directly under your shoulders and your body in a straight line from head to heels.
-          Shift your weight onto your right hand and the outer edge of your right foot, stacking your left foot on top of your right foot.
-          Engage your core and lift your left arm towards the ceiling, stacking your shoulders.
-          Keep your body in a straight line and gaze towards your top hand or straight ahead.
-        </p>
-        <br>
-        <span>Benefits</span>
-        <p>Strengthens the Arms and Wrists</p>
-        <p>Tones the Core Muscles</p>
-        <p>Improves Balance and Stability</p>
-        <p>Stimulates the Nervous System</p>
-        <p>Improves Concentration and Focus</p>
-      </div>
-    </div>
+        <div class="card">
+          <img src="{% static 'vasisthasana.jpg' %}" alt="Vasisthasana Pose" />
+          <h3>Vasisthasana Pose</h3>
+          <br>
+          <span>Description</span>
+          <p>
+            Start in a plank position, with your hands directly under your shoulders and your body in a straight line from head to heels.
+            Shift your weight onto your right hand and the outer edge of your right foot, stacking your left foot on top of your right foot.
+            Engage your core and lift your left arm towards the ceiling, stacking your shoulders.
+            Keep your body in a straight line and gaze towards your top hand or straight ahead.
+          </p>
+          <br>
+          <span>Benefits</span>
+          <p>Strengthens the Arms and Wrists</p>
+          <p>Tones the Core Muscles</p>
+          <p>Improves Balance and Stability</p>
+          <p>Stimulates the Nervous System</p>
+          <p>Improves Concentration and Focus</p>
+          <br>
+          <a href="{% url 'vedio_capture1' %}" class="detect-button">Try It</a>
+        </div>
+      </div>  
 
     <script>
       let nav = document.querySelector("nav");
@@ -278,6 +304,7 @@
           nav.classList.remove("sticky");
         }
       };
+      
     </script>
   </body>
 </html>

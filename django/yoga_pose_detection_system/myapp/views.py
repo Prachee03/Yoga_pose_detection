@@ -1,10 +1,20 @@
 from django.shortcuts import render
+import os
 import math
 import cv2
 import numpy as np 
 from time import time
 import mediapipe as mp
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
+from django.http import JsonResponse
+from keras.models import load_model
+
+import tkinter as tk
+
+root = tk.Tk()
+
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
 
 
 def about(request):
@@ -16,63 +26,83 @@ def poses(request):
     }
     return render(request, 'poses.html', context)
 
-
-mp_pose = mp.solutions.pose
-mp_drawing = mp.solutions.drawing_utils
-pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
-
 def index(request):
     return render(request, 'index.html')
 
+def detect(request):
+    vedio_capture()
+    return render(request,'detect.html')
 
-def detectPose(image, pose, display=True):
-    # Check if the image is loaded successfully
-    if image is None:
-        print("Error: Image not loaded.")
-        return None, None
+def vedio_capture(request):
+    def inFrame(lst):
+        if lst[28].visibility > 0.6 and lst[27].visibility > 0.6 and lst[15].visibility>0.6 and lst[16].visibility>0.6:
+            return True 
+        return False
+   
+    model  = load_model("E:/project/django/django/yoga_pose_detection_system/myapp/model.h5")
+    label = np.load("E:/project/django/django/yoga_pose_detection_system/myapp/labels.npy")
 
-    # create a copy of the input image
-    output_image = image.copy()
+    holistic = mp.solutions.pose
+    holis = holistic.Pose()
+    drawing = mp.solutions.drawing_utils
 
-    # convert the image from BGR into RGB format
-    imageRGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    cap = cv2.VideoCapture(0)
 
-    # Perform the pose detection
-    results = pose.process(imageRGB)
+    cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    
+    while cap.isOpened():  # Check if the capture object is open
+        lst = []
 
-    # Retrieve height and width
-    height, width, _ = image.shape
+        ret, frm = cap.read()
 
-    # Initialize a list to store detected landmarks
-    landmarks = []
+        if not ret:  # If frame is not retrieved, break from loop
+            break
 
-    # check if any landmarks
-    if results.pose_landmarks:
-        mp_drawing.draw_landmarks(image=output_image, landmark_list=results.pose_landmarks, connections=mp_pose.POSE_CONNECTIONS)
-        for landmark in results.pose_landmarks.landmark:
-            landmarks.append((int(landmark.x * width), int(landmark.y * height),
-                              (landmark.z * width) if landmark.HasField('z') else None))
+        window = np.zeros((screen_height, screen_width, 3), dtype="uint8")
 
-    # check if original input image and resultant image are specified
-    if display:
-        # diplay both image
-        plt.figure(figsize=[22, 22])
-        plt.subplot(121);plt.imshow(image[:, :, ::-1]);plt.title("Original Image");plt.axis('off');
-        plt.subplot(122);plt.imshow(output_image[:, :, ::-1]);plt.title("Output Image");plt.axis('off');
+        frm = cv2.flip(frm, 1)
 
-        # Plot Pose landmarks in 3D
-        mp_drawing.plot_landmarks(results.pose_world_landmarks, mp_pose.POSE_CONNECTIONS)
+        res = holis.process(cv2.cvtColor(frm, cv2.COLOR_BGR2RGB))
 
-    else:
-        # Return the output image
-        return output_image, landmarks
+        frm = cv2.blur(frm, (4,4))
+        if res.pose_landmarks and inFrame(res.pose_landmarks.landmark):
+            for i in res.pose_landmarks.landmark:
+                lst.append(i.x - res.pose_landmarks.landmark[0].x)
+                lst.append(i.y - res.pose_landmarks.landmark[0].y)
 
+            lst = np.array(lst).reshape(1,-1)
 
-def pose_detection(request):
-       if request.method == 'POST' and request.FILES['image']:
-            image = request.FILES['image']
-            processed_image, landmarks = detect_pose(image)
-            return JsonResponse({'image': processed_image, 'landmarks': landmarks})        
-       return render(request, 'index.html')
+            p = model.predict(lst)
+            pred = label[np.argmax(p)]
 
+            if p[0][np.argmax(p)] > 0.75:
+                cv2.putText(window, pred , (180,180),cv2.FONT_ITALIC, 1.3, (0,255,0),2)
+            else:
+                cv2.putText(window, "Asana is either wrong not trained" , (100,180),cv2.FONT_ITALIC, 1.8, (0,0,255),3)
 
+        else: 
+            cv2.putText(frm, "Make Sure Full body visible", (100,450), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255),3)
+
+            
+        drawing.draw_landmarks(frm, res.pose_landmarks, holistic.POSE_CONNECTIONS,
+                                connection_drawing_spec=drawing.DrawingSpec(color=(255,255,255), thickness=6 ),
+                                 landmark_drawing_spec=drawing.DrawingSpec(color=(0,0,255), circle_radius=3, thickness=3))
+
+        resized_frame = cv2.resize(frm, (1280, 720))  # Resize the frame to your desired dimensions
+
+        # Calculate the position to center the resized frame
+        top_left_x = (screen_width - 1280) // 2
+        top_left_y = (screen_height - 720) // 2
+
+        window[top_left_y:top_left_y+720, top_left_x:top_left_x+1280, :] = resized_frame
+
+        cv2.imshow("window", window)
+
+        if cv2.waitKey(1) == 27:
+            break  # Exit the loop if ESC key is pressed
+
+    cv2.destroyAllWindows()
+    cap.release()  # Release the webcam resources
+
+    return render(request, 'detect.html')

@@ -7,7 +7,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('about/', views.about, name='about'),
     path('poses/', views.poses, name='poses'),
-    path('', views.pose_detection, name='pose_detection')
+    path('detect/',views.vedio_capture,name="vedio_capture1")
 ]
 
 if settings.DEBUG:
