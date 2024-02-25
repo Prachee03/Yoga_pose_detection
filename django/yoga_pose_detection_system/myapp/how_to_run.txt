@@ -1,0 +1,9 @@
+Command to run the project
+
+Steps:
+
+(1) env_site/Scripts/activate.bat in django folder
+
+(2) cd yoga_pose_detection_system
+
+(3) python manage.py runserver

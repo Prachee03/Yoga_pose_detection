@@ -1,0 +1,221 @@
+{% load static %}
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>About Page</title>
+    <style>
+      /* Google Font Import Link */
+      @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-family: "Ubuntu", sans-serif;
+      }
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        transition: all 0.4s ease;
+      }
+      nav {
+        background-color: beige;
+      }
+      nav.sticky {
+        padding: 15px 20px;
+        background: burlywood;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+      nav .nav-content {
+        height: 100%;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      nav .logo a {
+        font-weight: 500;
+        font-size: 25px;
+        color: burlywood;
+      }
+      nav.sticky .logo a {
+        color: #fff;
+      }
+      .nav-content .nav-links {
+        display: flex;
+      }
+      .nav-content .nav-links li {
+        list-style: none;
+        margin: 0 8px;
+      }
+      .nav-links li a {
+        text-decoration: none;
+        color: #0e2431;
+        font-size: 18px;
+        font-weight: 500;
+        padding: 10px 4px;
+        transition: all 0.3s ease;
+      }
+      .nav-links li a:hover {
+        color: burlywood;
+      }
+      nav.sticky .nav-links li a {
+        color: #fff;
+        transition: all 0.4s ease;
+      }
+      nav.sticky .nav-links li a:hover {
+        color: #0e2431;
+      }
+      .home {
+        height: 100vh;
+        width: 100%;
+        background: url("images/background.png") no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: "Ubuntu", sans-serif;
+      }
+      h2 {
+        font-size: 30px;
+        margin-bottom: 6px;
+        color: burlywood;
+      }
+      .text {
+        text-align: justify;
+        padding: 40px 80px;
+        box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-top: 110px;
+      }
+
+      .about-text {
+        width: 60%;
+        text-align: justify;
+      }
+
+      .about-image {
+        width: 35%;
+        margin-left: 5%;
+        margin-right: 5%;
+        border-radius: 8px;
+      }
+
+      .member-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 50px;
+      }
+
+      .member-card {
+        width: 30%;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .member-card h3 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .member-card p {
+        font-size: 16px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-content">
+        <div class="logo">
+          <a href="{% url 'index' %}">Yoga Pose Detection System</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'poses' %}">Poses</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div style="margin-top: 85px; margin-left: 85px">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>Yoga Pose Detection System</h2>
+          <br />
+          <p>
+            The Yoga Pose Detection System is an innovative project that allows
+            users to explore various yoga poses either by uploading static
+            images or by using real-time detection using a webcam.
+          </p>
+          <br />
+          <p>
+            Users can view detailed instructions for each pose and practice yoga
+            in the comfort of their own homes.
+          </p>
+          <br />
+          <p>
+            This system uses advanced machine learning algorithms to accurately
+            detect and classify yoga poses, providing users with real-time
+            feedback and guidance.
+          </p>
+          <br />
+          <p>
+            Whether you're a beginner or an experienced yogi, this system is
+            designed to enhance your yoga practice and improve your overall
+            well-being.
+          </p>
+        </div>
+        <img
+          src="{% static 'yoga_pose_detection.png' %}"
+          alt="Yoga Pose Detection"
+          class="about-image"
+        />
+      </div>
+
+      <div class="member-cards">
+        <div class="member-card">
+          <h3>Kashish Thanki</h3>
+          <p>Computer Engineer</p>
+        </div>
+
+        <div class="member-card">
+          <h3>Prachee Shukla</h3>
+          <p>Computer Engineer</p>
+        </div>
+
+        <div class="member-card">
+          <h3>Chirag Bhundiya</h3>
+          <p>Computer Engineer</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let nav = document.querySelector("nav");
+      window.onscroll = function () {
+        if (document.documentElement.scrollTop > 20) {
+          nav.classList.add("sticky");
+        } else {
+          nav.classList.remove("sticky");
+        }
+      };
+    </script>
+  </body>
+</html>
